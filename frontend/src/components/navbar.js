@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Navbar as BSNavbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap';
+import RedirectWrapper from "../helpers/RedirectOnClick";
 
 class Navbar extends Component {
   render() { 
+    const Title = RedirectWrapper((props) => (
+      <BSNavbar.Brand {...props}>
+         Fun D 
+      </BSNavbar.Brand>
+    ), "/");
+
+    const ProfileLink = RedirectWrapper((props) => (
+      <NavDropdown.Item {...props}>
+        My Profile
+      </NavDropdown.Item>
+    ), "/profile");
+
     return (
       <BSNavbar
         bg="dark" variant="dark justify-content-between"
@@ -13,9 +25,7 @@ class Navbar extends Component {
           "zIndex": "1000"
         }}
       >
-        <BSNavbar.Brand>
-          <Link to="/"> Fun D </Link>
-        </BSNavbar.Brand>
+        <Title />
         <Nav className="justify-content-end">
           <Form inline>
             <FormControl type="text" size="sm" placeholder="Search Jobs" className="mr-sm-2" />
@@ -28,11 +38,7 @@ class Navbar extends Component {
             <i className="fas fa-bell" />
           </Nav.Link>
           <NavDropdown title={<i className="fas fa-user-circle"/>} alignRight>
-            <NavDropdown.Item>
-              <Link to="/profile">
-                My Profile
-              </Link>
-            </NavDropdown.Item>
+            <ProfileLink />
             <NavDropdown.Item>
               My Events
             </NavDropdown.Item>
