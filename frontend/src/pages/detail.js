@@ -19,7 +19,11 @@ const Line = styled.div`
     borderColor:'#bbb';
 `
 
-class MyVerticallyCenteredModal extends React.Component {
+class MyVerticallyCenteredModal extends Component {
+    onSubmit = (e) => {
+        this.props.onSubmit(e);
+        this.props.onHide();
+    }
     render() {
       return (
         <Modal
@@ -35,10 +39,16 @@ class MyVerticallyCenteredModal extends React.Component {
           </Modal.Header>
             
           <Modal.Body>
-            <Form>
+            <Form
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    this.props.onHide();
+                    return false;
+                }}
+            >
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Money</Form.Label>
-                    <Form.Control type="text" pattern="\d*\.?\d*" placeholder="Enter money (Baht)" />
+                    <Form.Control ref={this.props.fundAmtRef} type="text" pattern="\d*\.?\d*" placeholder="Enter money (Baht)" />
                     {/* <Form.Text className="text-muted">
                     We'll never share your email with anyone else.
                     </Form.Text> */}
@@ -47,12 +57,26 @@ class MyVerticallyCenteredModal extends React.Component {
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.onHide}>Close</Button>
-            <Button>Submit</Button>
+            <Button onClick={this.onSubmit}>Submit</Button>
           </Modal.Footer>
         </Modal>
       );
     }
   }
+
+function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+}
+
+const MockAPI = {
+    addFund: async (val) => {
+        return new Promise((res) => {
+            setTimeout(() => {
+                res(val);
+            }, 500);
+        })
+    }
+}
 
 class Detail extends Component {
     constructor(props){
@@ -66,10 +90,9 @@ class Detail extends Component {
             tags: [],
             members: [],
             modalShow: false,
-            current_money: '',
-            goal_money:'',
-            contributors: []
-            
+            current_money: 0,
+            goal_money: 0,
+            contributors: [],
         }
         // console.log(this.state)
     }
@@ -86,8 +109,8 @@ class Detail extends Component {
             project_desc: project[0]['description'],
             project_title: project[0]['title'],
             tags: project[0]['tags'],
-            current_money: project[0]['current_money'],
-            goal_money: project[0]['goal'],
+            current_money: parseFloat(project[0]['current_money']),
+            goal_money: parseFloat(project[0]['goal']),
             contributors: contributors
         })
         // var contributors =  ;
@@ -98,8 +121,26 @@ class Detail extends Component {
 
     }
 
+    onSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            if (parseFloat(this._fundAmt.value) <= 0) {
+                return false;
+            }
+            // Mock API
+            const addVal = await MockAPI.addFund(this._fundAmt.value);
+            this.setState({
+                current_money: parseFloat(this.state.current_money) + parseFloat(addVal)
+            })
+        } catch(error) {
+            // Fail silently
+        }
+        return false;
+    }
+
     render() {
         let modalClose = () => this.setState({ modalShow: false });
+        const isOverFunded = parseFloat(this.state.current_money) / parseFloat(this.state.goal_money) >= 1;
         return (
             <section >
                 {/* <p>this is detail page</p>/ */}
@@ -128,12 +169,12 @@ class Detail extends Component {
                         <Col xl={4}>
                             <Card style={{padding:'15px',marginBottom:'30px'}}>
                                 <Card.Body>
-                                    <Card.Title ><b style={{fontSize:'20px'}}>{this.state.current_money} Baht</b> of {this.state.goal_money} </Card.Title>
-                                    <ProgressBar animated variant="warning" now={60}/>
+                                    <Card.Title ><b style={{fontSize:'20px'}}>{formatNumber(this.state.current_money)} Baht</b> of {formatNumber(this.state.goal_money)} </Card.Title>
+                                    <ProgressBar animated variant={isOverFunded ? "success" : "warning"} now={100 * parseFloat(this.state.current_money) / parseFloat(this.state.goal_money)}/>
                                     <div style={{height:'30px'}}/>
                                     <div style={{display:'flex',justifyContent:'center'}}>
                                         {/* <i class="fas fa-money-bill-wave" style={{fontSize:'40px',marginRight:'10px'}}></i> */}
-                                        <Button variant="warning" onClick={()=>{this.setState({modalShow:true})}} style={{width:'50%'}}> Fund </Button>
+                                        <Button variant={isOverFunded ? "success" : "warning"} onClick={()=>{this.setState({modalShow:true})}} style={{width:'50%'}}> {isOverFunded ? "Funded" : "Fund"} </Button>
                                     </div>
                                 </Card.Body>
                             </Card>
@@ -230,8 +271,10 @@ class Detail extends Component {
                     <div style={{height:'30px'}}/>
                 </Container>
                 <MyVerticallyCenteredModal
-                show={this.state.modalShow}
-                onHide={modalClose}
+                    show={this.state.modalShow}
+                    onHide={modalClose}
+                    onSubmit={this.onSubmit}
+                    fundAmtRef={me => this._fundAmt = me}
                 />              
             </section>
         );
