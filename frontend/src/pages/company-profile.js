@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Card, Col, Row, Image } from 'react-bootstrap';
 import CanvasJSReact from '../assets/canvasjs.react'
+import axios from 'axios'
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const activities = [
@@ -167,7 +168,11 @@ class CompanyProfile extends Component {
       ]
     }]
   }
+  async componentDidMount(){
+    const company_data = (await axios.get('http://10.22.5.86:8080/company/5c9f5bcd897c9af0af874e9d')).data
+    console.log('data',company_data)
 
+  }
 
   render() {
     return (
