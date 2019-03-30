@@ -220,13 +220,26 @@ height: 500px;
 display: flex;
 justify-content: center;
 align-items: center;
-flex-direction: column;
-background-image: url("https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg");
+background-image: url("${require("../../assets/images/BG.jpg")}");
 background-size: cover;
 background-attachment: fixed;
 background-position: center;
-padding: 30px 30px 0px 30px;
-color: #FFF;
+color: black;
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-image: linear-gradient(#FFF7, #FFF0, #FFF7);
+    height: 100%;
+    width: 100%;
+    padding: 30px 30px 0px 30px;
+
+    span.text {
+        background-color: #FFF;
+    }
+}
 
 .main-counter {
     display: flex;
@@ -263,21 +276,23 @@ class Counter extends Component {
         const digitCount = Math.ceil(counterString.length / 3);
         return (
             <CounterStyle>
-                <div className="main-counter">
-                    {
-                        (Array.from(new Array((groupNumber === null) ? digitCount : groupNumber).keys()).map((groupIdx) => {
-                            const subString = counterString.slice(groupIdx * 3, groupIdx * 3 + 3);
-                            return (
-                                <div className="digit-group" key={groupIdx}>
-                                    <FlipCounter num={subString.length > 0 ? parseInt(subString[0]) : 0} />
-                                    <FlipCounter num={subString.length > 1 ? parseInt(subString[1]) : 0} />
-                                    <FlipCounter num={subString.length > 2 ? parseInt(subString[2]) : 0} />
-                                </div>
-                            );
-                        }))
-                    }
+                <div className="wrapper">
+                    <div className="main-counter">
+                        {
+                            (Array.from(new Array((groupNumber === null) ? digitCount : groupNumber).keys()).map((groupIdx) => {
+                                const subString = counterString.slice(groupIdx * 3, groupIdx * 3 + 3);
+                                return (
+                                    <div className="digit-group" key={groupIdx}>
+                                        <FlipCounter num={subString.length > 0 ? parseInt(subString[0]) : 0} />
+                                        <FlipCounter num={subString.length > 1 ? parseInt(subString[1]) : 0} />
+                                        <FlipCounter num={subString.length > 2 ? parseInt(subString[2]) : 0} />
+                                    </div>
+                                );
+                            }))
+                        }
+                    </div>
+                    <span className="text">{this.state.counter} คนกำลังว่างงาน</span>
                 </div>
-                <span>{this.state.counter} คนกำลังว่างงาน</span>
             </CounterStyle>
         );
     }
