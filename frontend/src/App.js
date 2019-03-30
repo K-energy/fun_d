@@ -3,6 +3,7 @@ import './App.css';
 import { Navbar } from './components';
 
 import { BrowserRouter, Route } from 'react-router-dom';
+import CompanyProfile from './pages/company-profile';
 
 class App extends Component {
   render() {
@@ -15,7 +16,8 @@ class App extends Component {
               <h1>This is Fun D</h1>
               <i className="fa fa-bars" />
             </section>
-          )}/>
+          )} />
+          <Route path="/profile" component={CompanyProfile} />
         </BrowserRouter>
       </>
     );
