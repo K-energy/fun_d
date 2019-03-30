@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Card, Col, Row, Image } from 'react-bootstrap';
 import CanvasJSReact from '../assets/canvasjs.react'
+import styled from "styled-components";
 import axios from 'axios'
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+// var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 const Style = styled.section`
