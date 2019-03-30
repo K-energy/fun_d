@@ -70,8 +70,15 @@ class Detail extends Component {
                     </Row>
                     <Row style={{marginTop:'40px'}}>
                         <div>
-                            <h2>Member list</h2>
-                            <div style={{borderRadius:'50%',height:'50px',width:'50px',backgroundColor:'#bbb'}}/>
+                            <h1>Member list</h1>
+                            <div style={{display:'flex',alignItems:'center'}}>
+                                <div style={{borderRadius:'50%',height:'50px',width:'50px',backgroundColor:'#bbb',marginRight:'15px'}}/>
+                                <div style={{display:'flex',flexDirection:'row'}}>
+                                    <p style={{verticalAlign:'center'}}><b>นางสาว ศักดิ์ชัย กฐินเทศ</b></p>
+                                    <p>ติดตามประเมินผลการทำงานคนพิการ</p>
+                                </div>
+                                
+                            </div>
                         </div>
                     </Row>
                 </Container>
