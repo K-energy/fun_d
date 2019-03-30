@@ -16,6 +16,7 @@ min-height: 300px;
 
 img {
     object-fit: cover;
+    width: 250px;
 }
 
 .info {

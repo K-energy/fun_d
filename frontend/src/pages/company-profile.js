@@ -209,8 +209,8 @@ class CompanyProfile extends Component {
             <Row>
               <Col className="d-flex flex-wrap justify-content-between">
               {
-                activities.map(activity => (
-                  <ActivityInfoItem activity={activity} />
+                activities.map((activity, idx) => (
+                  <ActivityInfoItem activity={activity} key={idx}/>
                   ))
                 }
               </Col>

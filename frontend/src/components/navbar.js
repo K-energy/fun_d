@@ -5,7 +5,12 @@ import RedirectWrapper from "../helpers/RedirectOnClick";
 class Navbar extends Component {
   render() { 
     const Title = RedirectWrapper((props) => (
-      <BSNavbar.Brand {...props}>
+      <BSNavbar.Brand
+        {...props}
+        style={{
+          cursor: "pointer"
+        }}
+      >
          Fun D 
       </BSNavbar.Brand>
     ), "/");
