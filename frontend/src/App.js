@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Navbar } from './components';
+import { Home, Detail, CompanyProfile } from "./pages"
 
 import { BrowserRouter, Route } from 'react-router-dom';
 
@@ -8,14 +9,11 @@ class App extends Component {
   render() {
     return (
       <>
-        <Navbar></Navbar>
+        <Navbar />
         <BrowserRouter>
-          <Route exact path="/" component={() => (
-            <section>
-              <h1>This is Fun D</h1>
-              <i className="fa fa-bars" />
-            </section>
-          )}/>
+          <Route exact path="/" component={Home}/>
+          <Route exact path="/detail" component={Detail}/>
+          <Route exact path="/profile" component={CompanyProfile}/>
         </BrowserRouter>
       </>
     );
