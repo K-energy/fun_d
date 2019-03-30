@@ -47,6 +47,7 @@ class ActivityInfoItem extends Component {
 }
 
 class CompanyProfile extends Component {
+  
   doughnutOptions = {
     subtitles: [{
       text: "Total: 100M THB",
@@ -168,9 +169,24 @@ class CompanyProfile extends Component {
       ]
     }]
   }
+  constructor(props){
+    super(props)
+    this.state = {
+      title:'',
+      desc:'',
+      link:'',
+      involved_projects:''
+    }
+  }
   async componentDidMount(){
     const company_data = (await axios.get('http://10.22.5.86:8080/company/5c9f5bcd897c9af0af874e9d')).data
-    console.log('data',company_data)
+    this.setState({
+      title:company_data['title'],
+      desc:company_data['description'],
+      link:company_data['link'],
+      involved_project:company_data['involved_projects']
+    })
+    // console.log('data',company_data)
 
   }
 
@@ -186,9 +202,9 @@ class CompanyProfile extends Component {
               <Image src={require('../resources/img/accenture.png')} fluid />
               <Card style={{flex: 1, border: 'none'}}>
                 <Card.Body>
-                    <Card.Title> Accenture Co, Ltd. </Card.Title>
-                    <Card.Subtitle> <a href="https://www.accenture.com/th-en">visit webpage</a> </Card.Subtitle>
-                    <Card.Text> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita, iure. Minus, magni, eligendi sequi vero deserunt sed sunt fugit voluptates eaque facilis molestiae tenetur quo? Libero voluptate distinctio eaque qui! </Card.Text>
+                    <Card.Title> {this.state.title} </Card.Title>
+                    <Card.Subtitle> <a href={this.state.link}>{this.state.link}</a> </Card.Subtitle>
+                    <Card.Text> {this.state.desc} </Card.Text>
                 </Card.Body>
               </Card>
           </div>
