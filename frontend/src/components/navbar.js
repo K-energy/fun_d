@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import { Navbar as BSNavbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap';
-import RedirectWrapper from "../helpers/RedirectOnClick";
+import { Link } from 'react-router-dom'
 
 class Navbar extends Component {
   render() { 
     return (
       <BSNavbar
         bg="dark" variant="dark justify-content-between"
-        style={{
-          "position": "sticky",
-          "top": "0px",
-          "zIndex": "1000"
-        }}
       >
         <BSNavbar.Brand as={Link} to ="/">
           Fun D
@@ -28,9 +23,9 @@ class Navbar extends Component {
             <i className="fas fa-bell" />
           </Nav.Link>
           <NavDropdown title={<i className="fas fa-user-circle"/>} alignRight>
-          <NavDropdown.Item {...props} as={Link} to ="/profile">
-            My Profile
-          </NavDropdown.Item>
+            <NavDropdown.Item as={Link} to ="/profile">
+              My Profile
+            </NavDropdown.Item>
             <NavDropdown.Item>
               My Events
             </NavDropdown.Item>
