@@ -13,8 +13,8 @@ class Navbar extends Component {
           "zIndex": "1000"
         }}
       >
-        <BSNavbar.Brand>
-          <Link to="/"> Fun D </Link>
+        <BSNavbar.Brand as={Link} to ="/">
+          Fun D
         </BSNavbar.Brand>
         <Nav className="justify-content-end">
           <Form inline>
