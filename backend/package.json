@@ -1,0 +1,40 @@
+{
+    "name": "booboothetutorbackend",
+    "version": "1.0.0",
+    "description": "the API Server for Booboo the Tutor",
+    "main": "index.js",
+    "scripts": {
+        "dev": "NODE_ENV=dev MONGO_HOST=localhost PORT=8080 JWT_SECRET=booboothecorgi UPLOAD_PATH_ID_PHOTO=./static/id/ UPLOAD_PATH_PROFILE_PHOTO=./static/profile/ nodemon server.js",
+        "start": "node server.js",
+        "test": "NODE_ENV=test MONGO_HOST=localhost PORT=8080 JWT_SECRET=booboothecorgi mocha --exit || exit 0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://gitlab.com/se2018/Boobooteam/booboothetutor.git"
+    },
+    "author": "Boobooteam",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^3.0.2",
+        "body-parser": "^1.18.3",
+        "cors": "^2.8.4",
+        "dotenv": "^6.1.0",
+        "express": "^4.16.4",
+        "express-jwt": "^5.3.1",
+        "jsonwebtoken": "^8.3.0",
+        "jwt-decode": "^2.2.0",
+        "lodash": "^4.17.11",
+        "moment": "^2.22.2",
+        "momentjs": "^2.0.0",
+        "mongoose": "^5.3.3",
+        "morgan": "^1.9.1",
+        "multer": "^1.4.1",
+        "uuid": "^3.3.2"
+    },
+    "devDependencies": {
+        "chai": "^4.2.0",
+        "chai-http": "^4.2.0",
+        "mocha": "^5.2.0",
+        "nodemon": "^1.18.5"
+    }
+}

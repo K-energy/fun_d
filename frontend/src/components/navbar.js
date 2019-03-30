@@ -12,11 +12,6 @@ class Navbar extends Component {
     return (
       <BSNavbar
         bg="dark" variant="dark justify-content-between"
-        style={{
-          "position": "sticky",
-          "top": "0px",
-          "zIndex": "1000"
-        }}
       >
         <BSNavbar.Brand as={Link} to ="/" style={{
           display: "flex",
@@ -44,9 +39,9 @@ class Navbar extends Component {
             <i className="fas fa-bell" />
           </Nav.Link>
           <NavDropdown title={<i className="fas fa-user-circle"/>} alignRight>
-          <NavDropdown.Item as={Link} to ="/profile">
-            My Profile
-          </NavDropdown.Item>
+            <NavDropdown.Item as={Link} to ="/profile">
+              My Profile
+            </NavDropdown.Item>
             <NavDropdown.Item>
               My Events
             </NavDropdown.Item>
