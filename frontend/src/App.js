@@ -4,7 +4,6 @@ import { Navbar } from './components';
 import { Home, Detail, CompanyProfile } from "./pages"
 
 import { BrowserRouter, Route } from 'react-router-dom';
-import CompanyProfile from './pages/company-profile';
 
 class App extends Component {
   render() {
