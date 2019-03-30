@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { HomeComponent } from "../components";
 
 const Style = styled.section`
-padding: 30px;
+/* padding: 30px; */
 `;
 
 class Home extends Component {

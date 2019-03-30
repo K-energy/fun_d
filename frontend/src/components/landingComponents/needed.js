@@ -9,6 +9,7 @@ const Style = styled.article`
     justify-content: center;
     align-items: center;
 }
+padding: 30px 30px 0px 30px;
 `;
 
 class Needed extends Component {

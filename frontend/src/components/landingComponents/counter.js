@@ -216,11 +216,17 @@ class FlipCounter extends React.Component {
 }
 
 const CounterStyle = styled.article`
-height: 300px;
+height: 500px;
 display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
+background-image: url("https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg");
+background-size: cover;
+background-attachment: fixed;
+background-position: center;
+padding: 30px 30px 0px 30px;
+color: #FFF;
 
 .main-counter {
     display: flex;
@@ -244,6 +250,9 @@ class Counter extends Component {
     }
     componentDidMount() {
         this._tickID = setInterval(this.tick, 1000);
+    }
+    componentWillUnmount() {
+        clearInterval(this._tickID);
     }
     render() {
         let counterString = String(this.state.counter);
