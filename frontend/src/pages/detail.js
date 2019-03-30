@@ -4,6 +4,7 @@ import styled from "styled-components";
 import users from './user_mockup';
 import axios from 'axios';
 import setting from "../setting.json";
+import _ from "lodash";
 
 const Circle = styled.div`
     border-radius : 50%;
@@ -182,7 +183,7 @@ class Detail extends Component {
                                 <Card.Title>Sponsorship</Card.Title>
                                 
                                 <Card.Body>
-                                    { this.state.contributors.map( (contributor, idx)=>{
+                                    { _.defaultTo(this.state.contributors, []).map( (contributor, idx)=>{
                                         return (
                                             <Table striped bordered key={idx}>
                                                 <tbody>
