@@ -8,12 +8,15 @@ const activities = [
     title: 'Urban Healthcare',
     place: 'Chiang Mai',
     time: 'Aug 2018 - Aug 2019',
-    donated: '300,000 THB'
+    donated: '300,000 THB',
+    image: require('../resources/img/activity_banner_2.jpg')
   },
   {
     title: 'Urban Teachers',
     place: 'Mae Hong Sorn',
-    time: 'Aug 2018 - Aug 2019'
+    time: 'Aug 2018 - Aug 2019',
+    donated: '20,000 THB',
+    image: require('../resources/img/activity_banner_1.jpg')
   }
 ]
 
@@ -21,14 +24,22 @@ class ActivityInfoItem extends Component {
   render() {
     const { activity } = this.props;
     return (
-      <Card className="my-4">
-        <Card.Img src="http://via.placeholder.com/900x300?text=activity"></Card.Img>
-          <Card.ImgOverlay>
+      <Card className="my-4 col-md-5 mr-2">
+        <Card.Img
+          style={{
+            opacity: '0.5',
+            filter: 'blur(2px)'
+          }}
+          src={activity.image || "http://via.placeholder.com/900x300?text=activity"}
+        ></Card.Img>
+          <Card.ImgOverlay style={{
+            backgroundImage: "linear-gradient(#FFF9, #FFF6, #FFF0)"
+          }}>
               <Card.Title> {activity.title} </Card.Title>
-              <Card.Subtitle className="text-muted"> {activity.place}, {activity.time} </Card.Subtitle>
+              <Card.Subtitle> {activity.place}, {activity.time} </Card.Subtitle>
               <Card.Text> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, corrupti iure rem quasi amet autem dolore perferendis velit, incidunt repudiandae nulla repellat facilis nemo perspiciatis laboriosam sit vero dolores pariatur! </Card.Text>
           </Card.ImgOverlay>
-        <Card.Header> Donated 300,000 THB </Card.Header>
+        <Card.Header> Donated {activity.donated} </Card.Header>
       </Card>
     )
   }
@@ -162,12 +173,13 @@ class CompanyProfile extends Component {
     return (
       <section>
         <Container>
-          <h3>
+          <h2>
             Company Profile
-          </h3>
+          </h2>
+          <br></br>
           <div className="d-flex">
-              <Image src="http://via.placeholder.com/250?text=Accenture" fluid />
-              <Card style={{flex: 1}}>
+              <Image src={require('../resources/img/accenture.png')} fluid />
+              <Card style={{flex: 1, border: 'none'}}>
                 <Card.Body>
                     <Card.Title> Accenture Co, Ltd. </Card.Title>
                     <Card.Subtitle> <a href="https://www.accenture.com/th-en">visit webpage</a> </Card.Subtitle>
@@ -175,6 +187,8 @@ class CompanyProfile extends Component {
                 </Card.Body>
               </Card>
           </div>
+          <br/>
+          <hr></hr>
           <h3>
             Sponsorships
           </h3>
@@ -186,12 +200,21 @@ class CompanyProfile extends Component {
               <CanvasJSChart options={this.barOptions}></CanvasJSChart>
             </Col>
           </Row>
+          <br />
+          <h5>
+            Top Donations
+          </h5>
+
           <Container>
-            {
-              activities.map(activity => (
-                <ActivityInfoItem activity={activity} />
-              ))
-            }
+            <Row>
+              <Col className="d-flex flex-wrap justify-content-between">
+              {
+                activities.map(activity => (
+                  <ActivityInfoItem activity={activity} />
+                  ))
+                }
+              </Col>
+            </Row>
           </Container>
         </Container>
       </section>

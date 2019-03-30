@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container,Row,Col,Card,ProgressBar,Button,Table } from 'react-bootstrap';
+import { Container,Row,Col,Card,ProgressBar,Button,Table,Modal } from 'react-bootstrap';
 
 import users from './user_mockup'
 
@@ -10,7 +10,8 @@ class Detail extends Component {
         this.state = {
             users:users['users'],
             project_title:'โครงการบัวแก้วสัญจร',
-            project_desc:'กระทรวงการต่างประเทศได้จัดทำโครงการบัวแก้วสัญจรพบประชาชน โดยการนำข้าราชการกระทรวงการต่างประเทศเดินทางไปรับฟังความคิดเห็นและดูสภาพความเป็อยู่ของประชาชนในจังหวัดตามแนวชายแดน เพื่อส่งเสริมให้นโยบายการต่างประเทศเป็นของประชาชนอย่างแท้จริง และสอดคล้องกับนโยบายของรัฐบาลในการสนับสนุนให้ประชาชนมีส่วนร่วมในการกำหนดนโยบายต่างประเทศและนโยบายด้านต่างๆ ของรัฐบาล และเพื่อให้ประชาชนตระหนักว่านโยบายต่างประเทศเป็นสิ่งที่จับต้องได้และเกี่ยวข้องกับปากท้องและการดำรงชีวิต ซึ่งจากการดำเนินโครงการที่ผ่านมา มีประชาชนและข้าราชการในพื้นที่เข้าร่วมงานเป็นจำนวนมาก ทำให้กระทรวงการต่างประเทศได้รับข้อมูล ข้อเท็จจริง ความต้องการและปัญหาจากประชาชนในพื้นที่บริเวณชายแดน แล้วนำมาเป็นข้อมูลประกอบการดำเนินนโยบาย กำหนดมาตรการแก้ไขปัญหา และหารือกับผู้นำประเทศเพื่อนบ้าน'
+            project_desc:'กระทรวงการต่างประเทศได้จัดทำโครงการบัวแก้วสัญจรพบประชาชน โดยการนำข้าราชการกระทรวงการต่างประเทศเดินทางไปรับฟังความคิดเห็นและดูสภาพความเป็อยู่ของประชาชนในจังหวัดตามแนวชายแดน เพื่อส่งเสริมให้นโยบายการต่างประเทศเป็นของประชาชนอย่างแท้จริง และสอดคล้องกับนโยบายของรัฐบาลในการสนับสนุนให้ประชาชนมีส่วนร่วมในการกำหนดนโยบายต่างประเทศและนโยบายด้านต่างๆ ของรัฐบาล และเพื่อให้ประชาชนตระหนักว่านโยบายต่างประเทศเป็นสิ่งที่จับต้องได้และเกี่ยวข้องกับปากท้องและการดำรงชีวิต ซึ่งจากการดำเนินโครงการที่ผ่านมา มีประชาชนและข้าราชการในพื้นที่เข้าร่วมงานเป็นจำนวนมาก ทำให้กระทรวงการต่างประเทศได้รับข้อมูล ข้อเท็จจริง ความต้องการและปัญหาจากประชาชนในพื้นที่บริเวณชายแดน แล้วนำมาเป็นข้อมูลประกอบการดำเนินนโยบาย กำหนดมาตรการแก้ไขปัญหา และหารือกับผู้นำประเทศเพื่อนบ้าน',
+            fund: false
         }
         // console.log(this.state)
     }
@@ -71,17 +72,26 @@ class Detail extends Component {
                     <Row style={{marginTop:'40px'}}>
                         <div>
                             <h1>Member list</h1>
-                            <div style={{display:'flex',alignItems:'center'}}>
-                                <div style={{borderRadius:'50%',height:'50px',width:'50px',backgroundColor:'#bbb',marginRight:'15px'}}/>
-                                <div style={{display:'flex',flexDirection:'row'}}>
-                                    <p style={{verticalAlign:'center'}}><b>นางสาว ศักดิ์ชัย กฐินเทศ</b></p>
-                                    <p>ติดตามประเมินผลการทำงานคนพิการ</p>
+                            <div style={{display:'flex',flexDirection:'column'}}>
+                                <div style={{display:'flex'}}>
+                                    <div style={{borderRadius:'50%',height:'70px',width:'70px',backgroundColor:'#bbb',marginRight:'15px'}}/>
+                                    <div style={{display:'flex',flexDirection:'column'}}>
+                                        <p style={{verticalAlign:'center',fontSize:'30px'}}><b>นางสาว ศักดิ์ชัย กฐินเทศ</b></p>
+                                        <p>ติดตามประเมินผลการทำงานคนพิการ</p>
+                                    </div>
                                 </div>
-                                
+                                <div style={{display:'flex'}}>
+                                    <div style={{borderRadius:'50%',height:'70px',width:'70px',backgroundColor:'#bbb',marginRight:'15px'}}/>
+                                    <div style={{display:'flex',flexDirection:'column'}}>
+                                        <p style={{verticalAlign:'center',fontSize:'30px'}}><b>นาย เอลิส กตแก้ว</b></p>
+                                        <p>ติดตามประเมินผลการทำงานคนพิการ</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </Row>
                 </Container>
+
             </section>
         );
     }
