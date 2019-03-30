@@ -4,6 +4,11 @@ import CanvasJSReact from '../assets/canvasjs.react'
 import axios from 'axios'
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
+const CanvasJSChart = CanvasJSReact.CanvasJSChart;
+const Style = styled.section`
+  padding: 50px 0px;
+`;
+
 const activities = [
   {
     title: 'Urban Healthcare',
@@ -192,7 +197,7 @@ class CompanyProfile extends Component {
 
   render() {
     return (
-      <section>
+      <Style>
         <Container>
           <h2>
             Company Profile
@@ -238,7 +243,7 @@ class CompanyProfile extends Component {
             </Row>
           </Container>
         </Container>
-      </section>
+      </Style>
     );
   }
 }
