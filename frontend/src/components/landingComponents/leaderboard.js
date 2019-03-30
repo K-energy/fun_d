@@ -15,7 +15,7 @@ padding: 30px 30px 0px 30px;
 const data = [{
     "name": "Current Month",
     "CompanyA": 3000,
-    "CompanyB": 4000,
+    "CompanyB": 8000,
     "CompanyC": 5000,
 }, {
     "name": "Previous Month",
@@ -23,6 +23,13 @@ const data = [{
     "CompanyD": 7000,
     "CompanyC": 2000,
 }]
+
+const colors = [
+    "#8884d8",
+    "#82ca9d",
+    "#6684d8",
+    "#62ca9d"
+]
 
 class Leaderboard extends Component {
     render() {
@@ -37,15 +44,15 @@ class Leaderboard extends Component {
             <Style>
                 <h3>Leaderboard</h3>
                 <div className="content">
-                    <BarChart width={730} height={250} data={data}>
+                    <BarChart width={400} height={350} data={data}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="name" />
                         <YAxis />
                         <Tooltip />
                         <Legend />
                         {
-                            Keys.map((it) => (
-                                <Bar dataKey={it} key={it} fill="#8884d8" />
+                            Keys.map((it, idx) => (
+                                <Bar dataKey={it} stackId="a" key={it} fill={colors[idx]} />
                             ))
                         }
                     </BarChart>

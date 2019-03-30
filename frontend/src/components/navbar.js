@@ -29,7 +29,9 @@ class Navbar extends Component {
           </Nav.Link>
           <NavDropdown title={<i className="fas fa-user-circle"/>} alignRight>
             <NavDropdown.Item>
-              My Profile
+              <Link to="/profile">
+                My Profile
+              </Link>
             </NavDropdown.Item>
             <NavDropdown.Item>
               My Events
