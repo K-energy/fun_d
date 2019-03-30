@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { Navbar as BSNavbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap';
-<<<<<<< HEAD
-import { Link } from 'react-router-dom'
-=======
->>>>>>> a8bbc4f059c825a0ee5a7ba53beb73cb5c0314d3
 
 class Navbar extends Component {
   render() { 
@@ -27,15 +23,9 @@ class Navbar extends Component {
             <i className="fas fa-bell" />
           </Nav.Link>
           <NavDropdown title={<i className="fas fa-user-circle"/>} alignRight>
-<<<<<<< HEAD
             <NavDropdown.Item as={Link} to ="/profile">
               My Profile
             </NavDropdown.Item>
-=======
-          <NavDropdown.Item as={Link} to ="/profile">
-            My Profile
-          </NavDropdown.Item>
->>>>>>> a8bbc4f059c825a0ee5a7ba53beb73cb5c0314d3
             <NavDropdown.Item>
               My Events
             </NavDropdown.Item>
