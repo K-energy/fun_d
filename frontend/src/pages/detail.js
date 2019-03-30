@@ -47,16 +47,16 @@ class Detail extends Component {
                                 <Card.Title>Sponsorship</Card.Title>
                                 
                                 <Card.Body>
-                                    { this.state.users.map( (user,idx)=>{
+                                    { this.state.users.map( (user, idx)=>{
                                         return (
-                                            <Table striped bordered>
+                                            <Table striped bordered key={idx}>
                                                 <tbody>
                                                     <tr>
-                                                        <td><i class="fas fa-tag" style={{fontSize:'20px'}}/></td>
+                                                        <td><i className="fas fa-tag" style={{fontSize:'20px'}}/></td>
                                                         <td>{user.tag}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td><i class="fas fa-money-bill-wave" style={{fontSize:'20px'}}/></td>
+                                                        <td><i className="fas fa-money-bill-wave" style={{fontSize:'20px'}}/></td>
                                                         <td> 30000 baht</td>
                                                     </tr>
 
