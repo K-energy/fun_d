@@ -5,8 +5,6 @@ const morgan = require('morgan');
 const cors = require('cors');
 const path = require('path');
 const port = process.env.PORT || 8080;
-const dotenv = require('dotenv')
-dotenv.config()
 
 if (process.env.NODE_ENV != 'test'){
     var config = require('./config/db')
@@ -57,7 +55,7 @@ app.get('/', function(req, res) {
 })
 
 const router = require('./routes')
-app.use('/v1/', router)
+app.use('/', router)
 
 process.on('SIGINT', function() {
     console.log("\nฺBye! Process is shutting down by SIGINT(Ctrl-C)");

@@ -3,26 +3,34 @@
 const express = require('express')
 const router = express.Router()
 
-const users = require('./users')
-const auth = require('./auth')
-const search = require('./search')
-const post = require('./posts')
-const transaction = require('./transactions')
-const tagandlocation = require('./tagandlocation')
-const course = require('./courses')
-const comment = require('./comments')
-const rating = require('./rating')
-const attendedcourse = require('./attendedcourses')
+const Project = require('../models/Project')
+const Company = require('../models/Company')
 
-router.use('/', tagandlocation)
-router.use('/users', users)
-router.use('/auth', auth)
-router.use('/search', search)
-router.use('/post', post)
-router.use('/transaction', transaction)
-router.use('/course', course)
-router.use('/comment', comment)
-router.use('/rating', rating)
-router.use('/attended', attendedcourse)
+router.get('/project', async (req, res) => {
+  const projects = await Project.find({})
+  res.json(projects)
+})
+
+router.get('/project/:id', async (req, res) => {
+  const { id } = req.params
+
+  const project = await Project.findById(id).populate({
+    path: 'contributors',
+    model: 'Company'
+  })
+  res.json(project)
+})
+
+router.get('/company', async (req, res) => {
+  const companies = await Company.find({})
+  res.json(companies)
+})
+
+router.get('/company/:id', async (req, res) => {
+  const { id } = req.params
+
+  const company = await Company.findById(id)
+  res.json(company)
+})
 
 module.exports = router

@@ -1,4 +1,4 @@
 var config = {
-    db: `mongodb://${process.env.MONGO_HOST}:27017/BoobooTheTutor_test`
+  db: 'mongodb://localhost:27017/accenture-hack'
 };
 module.exports = config;
