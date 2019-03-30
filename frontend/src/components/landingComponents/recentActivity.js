@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Alert } from "react-bootstrap";
 
 const Style = styled.article`
-padding: 30px 30px 40px 30px;
 background: #0001;
 box-shadow: 0px 0px 10px #0007;
 h3 {
@@ -19,6 +18,14 @@ h3 {
         width: 70vw;
     }
 }
+
+.background-wrapper {
+    background-image: url(${require("../../resources/img/BG_curve_2.svg")});
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: 80vw;
+    padding: 30px 30px 40px 30px;
+}
 `
 
 const data = [
@@ -33,18 +40,20 @@ class RecentActivity extends Component {
     render() {
         return (
             <Style>
-                <h3><i className="fa fa-newspaper" />&nbsp;Recent Activity</h3>
-                <section className="content">
-                    <div>
-                        {
-                            data.map((txt, idx) => (
-                                <Alert key={idx} variant={txt[1]}>
-                                    {txt[0]}
-                                </Alert>
-                            ))
-                        }
-                    </div>
-                </section>
+                <div className="background-wrapper">
+                    <h3><i className="fa fa-newspaper" />&nbsp;Recent Activity</h3>
+                    <section className="content">
+                        <div>
+                            {
+                                data.map((txt, idx) => (
+                                    <Alert key={idx} variant={txt[1]}>
+                                        {txt[0]}
+                                    </Alert>
+                                ))
+                            }
+                        </div>
+                    </section>
+                </div>
             </Style>
         );
     }

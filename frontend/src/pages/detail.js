@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Container,Row,Col,Card,ProgressBar,Button,Table,Badge,Modal,Form } from 'react-bootstrap';
 import styled from "styled-components";
-import users from './user_mockup'
-import axios from 'axios'
+import users from './user_mockup';
+import axios from 'axios';
+import setting from "../setting.json";
 
 const Circle = styled.div`
     border-radius : 50%;
@@ -17,8 +18,6 @@ const Line = styled.div`
     width:'50px';
     borderColor:'#bbb';
 `
-
-const uri = "http://10.22.5.86:8080";
 
 class MyVerticallyCenteredModal extends React.Component {
     render() {
@@ -39,7 +38,7 @@ class MyVerticallyCenteredModal extends React.Component {
             <Form>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Money</Form.Label>
-                    <Form.Control type="email" placeholder="Enter money(Baht)" />
+                    <Form.Control type="text" pattern="\d*\.?\d*" placeholder="Enter money (Baht)" />
                     {/* <Form.Text className="text-muted">
                     We'll never share your email with anyone else.
                     </Form.Text> */}
@@ -76,12 +75,12 @@ class Detail extends Component {
     }
 
     async componentDidMount(){
-        const project = (await axios.get(`${uri}/project`)).data
+        const project = (await axios.get(`${setting["server_uri"]}/project`)).data
 
         const contributors = await Promise.all(project[0]['contributors'].map((id) => {
-            return axios.get(`${uri}/company/${id}`).then((d) => d.data);
+            return axios.get(`${setting["server_uri"]}/company/${id}`).then((d) => d.data);
         }));
-        console.log('test', contributors)
+
         await this.setState({
             members: project[0]['members'],
             project_desc: project[0]['description'],
@@ -130,7 +129,7 @@ class Detail extends Component {
                             <Card style={{padding:'15px',marginBottom:'30px'}}>
                                 <Card.Body>
                                     <Card.Title ><b style={{fontSize:'20px'}}>{this.state.current_money} Baht</b> of {this.state.goal_money} </Card.Title>
-                                    <ProgressBar variant="warning" now={60}/>
+                                    <ProgressBar animated variant="warning" now={60}/>
                                     <div style={{height:'30px'}}/>
                                     <div style={{display:'flex',justifyContent:'center'}}>
                                         {/* <i class="fas fa-money-bill-wave" style={{fontSize:'40px',marginRight:'10px'}}></i> */}
