@@ -220,7 +220,7 @@ height: 500px;
 display: flex;
 justify-content: center;
 align-items: center;
-background-image: url("${require("../../assets/images/BG.jpg")}");
+background-image: url("${require("../../resources/img/laughing-boy-banner.png")}");
 background-size: cover;
 background-attachment: fixed;
 background-position: center;
@@ -277,6 +277,7 @@ class Counter extends Component {
         return (
             <CounterStyle>
                 <div className="wrapper">
+                    <span className="text">ตอนนี้คนพิการรวม</span>
                     <div className="main-counter">
                         {
                             (Array.from(new Array((groupNumber === null) ? digitCount : groupNumber).keys()).map((groupIdx) => {

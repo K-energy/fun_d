@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Container,Row,Col,Card,ProgressBar,Button,Table,Badge,Modal,Form } from 'react-bootstrap';
 import styled from "styled-components";
-import users from './user_mockup'
-
+import users from './user_mockup';
+import axios from 'axios';
+import setting from "../setting.json";
 
 const Circle = styled.div`
     border-radius : 50%;
@@ -37,7 +38,7 @@ class MyVerticallyCenteredModal extends React.Component {
             <Form>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Money</Form.Label>
-                    <Form.Control type="email" placeholder="Enter money(Baht)" />
+                    <Form.Control type="text" pattern="\d*\.?\d*" placeholder="Enter money (Baht)" />
                     {/* <Form.Text className="text-muted">
                     We'll never share your email with anyone else.
                     </Form.Text> */}
@@ -62,10 +63,41 @@ class Detail extends Component {
             project_title:'โครงการบัวแก้วสัญจร',
             project_desc:'กระทรวงการต่างประเทศได้จัดทำโครงการบัวแก้วสัญจรพบประชาชน โดยการนำข้าราชการกระทรวงการต่างประเทศเดินทางไปรับฟังความคิดเห็นและดูสภาพความเป็อยู่ของประชาชนในจังหวัดตามแนวชายแดน เพื่อส่งเสริมให้นโยบายการต่างประเทศเป็นของประชาชนอย่างแท้จริง และสอดคล้องกับนโยบายของรัฐบาลในการสนับสนุนให้ประชาชนมีส่วนร่วมในการกำหนดนโยบายต่างประเทศและนโยบายด้านต่างๆ ของรัฐบาล และเพื่อให้ประชาชนตระหนักว่านโยบายต่างประเทศเป็นสิ่งที่จับต้องได้และเกี่ยวข้องกับปากท้องและการดำรงชีวิต ซึ่งจากการดำเนินโครงการที่ผ่านมา มีประชาชนและข้าราชการในพื้นที่เข้าร่วมงานเป็นจำนวนมาก ทำให้กระทรวงการต่างประเทศได้รับข้อมูล ข้อเท็จจริง ความต้องการและปัญหาจากประชาชนในพื้นที่บริเวณชายแดน แล้วนำมาเป็นข้อมูลประกอบการดำเนินนโยบาย กำหนดมาตรการแก้ไขปัญหา และหารือกับผู้นำประเทศเพื่อนบ้าน',
             fund: false,
-            modalShow: false
+            tags: [],
+            members: [],
+            modalShow: false,
+            current_money: '',
+            goal_money:'',
+            contributors: []
+            
         }
         // console.log(this.state)
     }
+
+    async componentDidMount(){
+        const project = (await axios.get(`${setting["server_uri"]}/project`)).data
+
+        const contributors = await Promise.all(project[0]['contributors'].map((id) => {
+            return axios.get(`${setting["server_uri"]}/company/${id}`).then((d) => d.data);
+        }));
+
+        await this.setState({
+            members: project[0]['members'],
+            project_desc: project[0]['description'],
+            project_title: project[0]['title'],
+            tags: project[0]['tags'],
+            current_money: project[0]['current_money'],
+            goal_money: project[0]['goal'],
+            contributors: contributors
+        })
+        // var contributors =  ;
+
+
+        // console.log(contributors)
+
+
+    }
+
     render() {
         let modalClose = () => this.setState({ modalShow: false });
         return (
@@ -75,14 +107,19 @@ class Detail extends Component {
                     <Row>
                         <Col xl={8}>
                             <Card>
-                                <Card.Img variant="top" src={require('../assets/images/cat.jpeg')} />
+                                <Card.Img variant="top" src={require('../assets/images/cat.jpg')} />
                                 <Card.Body>
                                     <Card.Title style={{fontSize:'30px'}}>{this.state.project_title}<br/></Card.Title>
                                     <Card.Title><b>Chaing Mai, 2018-2019</b></Card.Title>
                                     <Card.Text>{this.state.project_desc}</Card.Text>
                                     <div>
-                                        <Badge style={{margin:'5px'}} variant="primary">การศึกษา</Badge>
-                                        <Badge style={{margin:'5px'}} variant="primary">ผู้พิการทางสายตา</Badge>
+                                        {this.state.tags.map((tag,idx)=>{
+                                            return (
+                                                <Badge style={{margin:'5px'}} variant="primary">{tag}</Badge>
+                                            )
+                                        })}
+                                        {/* <Badge style={{margin:'5px'}} variant="primary">การศึกษา</Badge>
+                                        <Badge style={{margin:'5px'}} variant="primary">ผู้พิการทางสายตา</Badge> */}
                                     </div>
                                 </Card.Body>
 
@@ -91,8 +128,8 @@ class Detail extends Component {
                         <Col xl={4}>
                             <Card style={{padding:'15px',marginBottom:'30px'}}>
                                 <Card.Body>
-                                    <Card.Title ><b style={{fontSize:'30px'}}>60000 Baht</b> of 100000 </Card.Title>
-                                    <ProgressBar variant="warning" now={60}/>
+                                    <Card.Title ><b style={{fontSize:'20px'}}>{this.state.current_money} Baht</b> of {this.state.goal_money} </Card.Title>
+                                    <ProgressBar animated variant="warning" now={60}/>
                                     <div style={{height:'30px'}}/>
                                     <div style={{display:'flex',justifyContent:'center'}}>
                                         {/* <i class="fas fa-money-bill-wave" style={{fontSize:'40px',marginRight:'10px'}}></i> */}
@@ -104,19 +141,22 @@ class Detail extends Component {
                                 <Card.Title>Sponsorship</Card.Title>
                                 
                                 <Card.Body>
-                                    { this.state.users.map( (user, idx)=>{
+                                    { this.state.contributors.map( (contributor, idx)=>{
                                         return (
                                             <Table striped bordered key={idx}>
                                                 <tbody>
-                                                    <tr>
+                                                    <tr style={{width:'100%'}}>
                                                         <td><i className="fas fa-tag" style={{fontSize:'20px'}}/></td>
-                                                        <td>{user.tag}</td>
+                                                        <td>{contributor.title}</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr style={{width:'100%'}}>
                                                         <td><i className="fas fa-money-bill-wave" style={{fontSize:'20px'}}/></td>
                                                         <td> 30000 baht</td>
                                                     </tr>
-
+                                                    <tr style={{width:'100%'}}>
+                                                        <td><i class="fas fa-envelope"></i></td>
+                                                        <td><a href={contributor.link}>{contributor.link}</a></td>
+                                                    </tr>
                                                 </tbody>
                                             </Table>
                                         )
@@ -126,6 +166,7 @@ class Detail extends Component {
                             <div>
                                 <h1>Member list</h1>
                                 <div style={{display:'flex',flexDirection:'column'}}>
+{/*                                     
                                     <div style={{display:'flex'}}>
                                         <div style={{borderRadius:'50%',height:'70px',width:'70px',backgroundColor:'#bbb',marginRight:'15px'}}/>
                                         <div style={{display:'flex',flexDirection:'column'}}>
@@ -140,7 +181,18 @@ class Detail extends Component {
                                             <p style={{verticalAlign:'center',fontSize:'20px'}}><b>นาย เอลิส กตแก้ว</b>  <Badge variant="primary">PWD</Badge></p>
                                             <p>ติดตามประเมินผลการทำงานคนพิการ</p>
                                         </div>
-                                    </div>
+                                    </div> */}
+                                    {this.state.members.map((member,idx)=>{
+                                        return(
+                                            <div style={{display:'flex'}}>
+                                                <div style={{borderRadius:'50%',height:'70px',width:'70px',backgroundColor:'#bbb',marginRight:'15px'}}/>
+                                                <div style={{display:'flex',flexDirection:'column'}}>
+                                                    <p style={{verticalAlign:'center',fontSize:'20px'}}><b>{member}</b>  <Badge variant="primary">PWD</Badge></p>
+                                                    <p>ติดตามประเมินผลการทำงานคนพิการ</p>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
                                 </div>
                             </div>
                         </Col>
