@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Navbar as BSNavbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap';
+import RedirectWrapper from "../helpers/RedirectOnClick";
 
 class Navbar extends Component {
   render() { 
@@ -28,11 +28,9 @@ class Navbar extends Component {
             <i className="fas fa-bell" />
           </Nav.Link>
           <NavDropdown title={<i className="fas fa-user-circle"/>} alignRight>
-            <NavDropdown.Item>
-              <Link to="/profile">
-                My Profile
-              </Link>
-            </NavDropdown.Item>
+          <NavDropdown.Item {...props} as={Link} to ="/profile">
+            My Profile
+          </NavDropdown.Item>
             <NavDropdown.Item>
               My Events
             </NavDropdown.Item>

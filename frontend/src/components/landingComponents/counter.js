@@ -241,15 +241,16 @@ const groupNumber = null;
 
 class Counter extends Component {
     state = {
-        counter: 995
+        counter: 1290
     }
     tick = () => {
         this.setState({
-            counter: this.state.counter + 1
+            counter: this.state.counter - (Math.round(Math.random()*11) - 5)
         })
     }
     componentDidMount() {
-        this._tickID = setInterval(this.tick, 1000);
+        this.tick();
+        this._tickID = setInterval(this.tick, 1*1000);
     }
     componentWillUnmount() {
         clearInterval(this._tickID);
