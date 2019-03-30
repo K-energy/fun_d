@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Navbar as BSNavbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import { Navbar as BSNavbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap';
 
 class Navbar extends Component {
   render() { 
@@ -9,12 +9,28 @@ class Navbar extends Component {
         <BSNavbar.Brand> Fun D </BSNavbar.Brand>
         <Nav className="justify-content-end">
           <Form inline>
-            <FormControl type="text" placeholder="Search Jobs" className="mr-sm-2" />
-            <Button variant="outline-light">Search</Button>
+            <FormControl type="text" size="sm" placeholder="Search Jobs" className="mr-sm-2" />
+            <Nav.Link>
+              <i class="fas fa-search" />
+            </Nav.Link>
           </Form>
 
-          <Nav.Link>Notifications</Nav.Link>
-          <Nav.Link>Profile</Nav.Link>
+          <Nav.Link>
+            <i class="fas fa-bell" />
+          </Nav.Link>
+          <NavDropdown title={<i class="fas fa-user-circle"/>} alignRight>
+            <NavDropdown.Item>
+              My Profile
+            </NavDropdown.Item>
+            <NavDropdown.Item>
+              My Events
+            </NavDropdown.Item>
+
+            <NavDropdown.Divider />
+            <NavDropdown.Item>
+              Logout
+            </NavDropdown.Item>
+          </NavDropdown>
         </Nav>
       </BSNavbar>
     );
