@@ -16,27 +16,38 @@ padding: 30px 30px 0px 30px;
 
 const items = [
     {
+        image: require('../../resources/img/accenture_logo.png'),
         companyName: 'Accenture',
         donation: '300K THB',
     },
     {
+        image: require('../../resources/img/kbtg_logo.png'),
         companyName: 'KBTG',
         donation: '290K THB',
     },
     {
+        image: require('../../resources/img/chula_logo.jpg'),
         companyName: 'Chula',
         donation: '250K THB',
     },
     {
+        image: require('../../resources/img/scb_logo.png'),
         companyName: 'SCB',
         donation: '100K THB',
     },
 ]
 
-const LeaderBoardItem = ({ companyName, donation }) => {
+const LeaderBoardItem = ({ image, companyName, donation }) => {
     return (
         <Card className="text-center" style={{border: 'none'}}>
-        <Card.Img src="http://via.placeholder.com/250?text=Accenture"></Card.Img>
+            <Card.Img
+                src={image || "http://via.placeholder.com/250?text=Accenture"}
+                style={{
+                    width: "200px",
+                    height: "200px",
+                    objectFit: "contain"
+                }}
+            ></Card.Img>
             <Card.Body>
                 <Card.Title> {companyName} </Card.Title>
                 <Card.Subtitle> {donation} </Card.Subtitle>
@@ -54,7 +65,7 @@ class Leaderboard extends Component {
                 <div className="content">
                     {
                         items.map(item => (
-                            <LeaderBoardItem companyName={item.companyName} donation={item.donation} />
+                            <LeaderBoardItem companyName={item.companyName} donation={item.donation} image={item.image} />
                         ))
                     }
                 </div>
