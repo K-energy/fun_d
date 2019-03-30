@@ -151,7 +151,7 @@ class Detail extends Component {
                             <h1>Progress</h1>
                             <Card style={{marginBottom:'30px'}}>
                                 <div style={{width:'1200px',height:'300px',display:'flex',flexDirection:'row'}}>
-                                    <img style={{width:'600px',height:'100%'}} src={require('../assets/images/activity1.jpg')}/>
+                                    <img style={{width:'800px',height:'100%'}} src={require('../assets/images/activity1.jpg')}/>
                                         
                                     <div style={{width:'100%',padding:'10px'}}>
                                         <h2><b>สอนหนังสือ แก่เยาวชนรุ่นเยาว์</b></h2>
@@ -163,7 +163,7 @@ class Detail extends Component {
                             </Card>
                             <Card style={{marginBottom:'30px'}}>
                                 <div style={{width:'1200px',height:'300px',display:'flex',flexDirection:'row'}}>
-                                    <img style={{width:'600px',height:'100%'}} src={require('../assets/images/activity2.jpeg')}/>
+                                    <img style={{width:'800px',height:'100%'}} src={require('../assets/images/activity2.jpeg')}/>
                                         
                                     <div style={{width:'100%',padding:'10px'}}>
                                         <h2><b>สอนหนังสือ แก่เยาวชนรุ่นเยาว์ #2</b></h2>
