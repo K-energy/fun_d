@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 import { Navbar as BSNavbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap';
 
 class Navbar extends Component {
@@ -13,7 +13,9 @@ class Navbar extends Component {
           "zIndex": "1000"
         }}
       >
-        <BSNavbar.Brand> Fun D </BSNavbar.Brand>
+        <BSNavbar.Brand>
+          <Link to="/"> Fun D </Link>
+        </BSNavbar.Brand>
         <Nav className="justify-content-end">
           <Form inline>
             <FormControl type="text" size="sm" placeholder="Search Jobs" className="mr-sm-2" />

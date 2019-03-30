@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Button, ProgressBar } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const ProjectCardStyle = styled.article`
 padding: 20px;
@@ -52,10 +53,12 @@ const ProjectCard = (props) => (
             </div>
         </div>
         <div className="side">
-            <Button>
-                More Detail&nbsp;
-                <i className="fa fa-arrow-right" />
-            </Button>
+            <Link to="/detail">
+                <Button>
+                    More Detail&nbsp;
+                    <i className="fa fa-arrow-right" />
+                </Button>
+            </Link>
             <span>End in Blah Blah</span>
         </div>
     </ProjectCardStyle>
