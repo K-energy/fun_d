@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { Container, Card, Col, Row, Image } from 'react-bootstrap';
 import CanvasJSReact from '../assets/canvasjs.react'
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+import styled from "styled-components";
+
+const CanvasJSChart = CanvasJSReact.CanvasJSChart;
+const Style = styled.section`
+  padding: 50px 0px;
+`;
 
 const activities = [
   {
@@ -171,7 +176,7 @@ class CompanyProfile extends Component {
 
   render() {
     return (
-      <section>
+      <Style>
         <Container>
           <h2>
             Company Profile
@@ -217,7 +222,7 @@ class CompanyProfile extends Component {
             </Row>
           </Container>
         </Container>
-      </section>
+      </Style>
     );
   }
 }

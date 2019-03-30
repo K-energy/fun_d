@@ -11,7 +11,7 @@ class Navbar extends Component {
   render() { 
     return (
       <BSNavbar
-        bg="dark" variant="dark justify-content-between"
+        bg="success" variant="dark justify-content-between"
       >
         <BSNavbar.Brand as={Link} to ="/" style={{
           display: "flex",

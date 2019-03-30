@@ -12,6 +12,7 @@ border-radius: 5px;
 display: flex;
 margin-bottom: 15px;
 min-height: 300px;
+background: white;
 
 img {
     object-fit: cover;
@@ -59,7 +60,7 @@ const ProjectCard = ({ name, detail, current, goal, timeLoc, src, ...props }) =>
             </div>
             <div className="progress-wrapper">
                 <span>{formatNumber(current)} baht of {formatNumber(goal)} baht</span>
-                <ProgressBar animated now={100 * current/goal} />
+                <ProgressBar animated now={100 * current/goal} variant="warning" />
             </div>
         </div>
         <div className="side">
